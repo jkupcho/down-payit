@@ -3,7 +3,6 @@ const initialState = {
   downPayment: 0,
   loanDuration: 0,
   propertyTax: 0,
-  interestRate: 0,
   pmi: 0
 };
 

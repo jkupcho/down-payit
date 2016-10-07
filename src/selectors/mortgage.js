@@ -1,5 +1,5 @@
-export const calculateMortgagePayment = (form) => {
-  const monthlyInterest = ((form.interestRate / 100) / 12);
+export const calculateMortgagePayment = (form, interest) => {
+  const monthlyInterest = ((interest / 100) / 12);
   const principal = (form.propertyValue - form.downPayment);
 
   const numerator = (monthlyInterest * principal);
