@@ -6,14 +6,15 @@ import { isNumber } from '../utils';
 export default (props) => {
 
   function toNumber() {
+    if (props.value === 0) { return ''; }
     return props.value.toLocaleString();
   }
 
   function convertValue (payload) {
-    const converted = +payload[props.field].replace(/,/g, '');
-    if (isNumber(converted)) {
+    const converted = payload[props.field].replace(/,/g, '');
+    if (isNumber(converted) || converted.length === 0) {
       props.handleChange({
-        [props.field]: converted
+        [props.field]: +converted
       });
     }
   }
