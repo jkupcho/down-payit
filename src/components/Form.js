@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default ({propertyValue, downPayment, loanDuration, propertyTax, pmi, formUpdated}) => {
+export default ({formUpdated}) => {
   return (
     <form>
       <div className="form-group">
