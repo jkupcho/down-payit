@@ -6,6 +6,7 @@ import App from './App';
 import form from './reducers/form';
 import interest from './reducers/interest';
 import './index.css';
+import 'bootstrap/dist/css/bootstrap.css';
 
 const reducers = combineReducers({
   form,

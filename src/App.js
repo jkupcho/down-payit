@@ -1,19 +1,23 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import { connect } from 'react-redux'
 import './App.css';
+import Form from './components/Form';
+import { getMortgagePayment } from './selectors';
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
+      <div className="container">
+        <div className="row">
+          <div className="col-md-4">
+            <Form {...this.props} />
+          </div>
+          <div className="col-md-8">
+            <p className="well">
+              {this.props.mortgagePayment}
+            </p>
+          </div>
         </div>
-        <p className="App-intro">
-          {this.props.form.propertyValue} To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
       </div>
     );
   }
@@ -21,9 +25,24 @@ class App extends Component {
 
 function mapStateToProps (state) {
   return {
-    form: state.form
+    form: state.form,
+    interest: state.interest,
+    mortgagePayment: getMortgagePayment(state)
   };
 }
 
-const ConnectedApp = connect(mapStateToProps)(App);
+function mapDispatchToProps (dispatch) {
+  return {
+    formUpdated: (field) => {
+      dispatch({
+        type: 'FORM_UPDATED',
+        payload: {
+          [field.field]: field.value
+        }
+      })
+    }
+  }
+}
+
+const ConnectedApp = connect(mapStateToProps, mapDispatchToProps)(App);
 export default ConnectedApp;
