@@ -7,10 +7,11 @@ const initialState = {
 };
 
 export default (state = initialState, action) => {
-    switch (action.type) {
-        case 'FORM_UPDATED':
-            return { ...state, ...action.payload};
-        default:
-            return state;
-    }
+  console.log(action);
+  switch (action.type) {
+      case 'FORM_UPDATED':
+          return { ...state, ...action.payload};
+      default:
+          return state;
+  }
 }

@@ -1,28 +1,15 @@
 import React from 'react';
+import Input from './Input';
 
-export default ({formUpdated}) => {
+export default ({form, formUpdated}) => {
+
   return (
     <form>
-      <div className="form-group">
-        <label>Property Value</label>
-        <input type="text" className="form-control" placeholder="Property Value" onChange={ (e) => formUpdated({ field: 'propertyValue', value: +e.target.value })} />
-      </div>
-      <div className="form-group">
-        <label>Down Payment</label>
-        <input type="text" className="form-control" placeholder="Down Payment" onChange={ (e) => formUpdated({ field: 'downPayment', value: +e.target.value })}  />
-      </div>
-      <div className="form-group">
-        <label>Loan Duration</label>
-        <input type="text" className="form-control" placeholder="Loan Duration" onChange={ (e) => formUpdated({ field: 'loanDuration', value: +e.target.value })}  />
-      </div>
-      <div className="form-group">
-        <label>Property Tax</label>
-        <input type="text" className="form-control" placeholder="Property Tax" onChange={ (e) => formUpdated({ field: 'propertyTax', value: +e.target.value })}  />
-      </div>
-      <div className="form-group">
-        <label>PMI</label>
-        <input type="text" className="form-control" placeholder="PMI" onChange={ (e) => formUpdated({ field: 'pmi', value: +e.target.value })}  />
-      </div>
+      <Input inputLabel={'Property Value'} field={'propertyValue'} value={form.propertyValue} handleChange={formUpdated} />
+      <Input inputLabel={'Down Payment'} field={'downPayment'} value={form.downPayment} handleChange={formUpdated} />
+      <Input inputLabel={'Loan Duration'} field={'loanDuration'} value={form.loanDuration} handleChange={formUpdated} />
+      <Input inputLabel={'Property Tax'} field={'propertyTax'} value={form.propertyTax} handleChange={formUpdated} />
+      <Input inputLabel={'PMI'} field={'pmi'} value={form.pmi} handleChange={formUpdated} />
     </form>
   )
 }

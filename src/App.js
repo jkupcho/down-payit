@@ -33,12 +33,10 @@ function mapStateToProps (state) {
 
 function mapDispatchToProps (dispatch) {
   return {
-    formUpdated: (field) => {
+    formUpdated: (payload) => {
       dispatch({
         type: 'FORM_UPDATED',
-        payload: {
-          [field.field]: field.value
-        }
+        payload
       })
     }
   }

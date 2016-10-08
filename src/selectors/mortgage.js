@@ -5,5 +5,7 @@ export const calculateMortgagePayment = (form, interest) => {
   const numerator = (monthlyInterest * principal);
   const denominator = (1 - (Math.pow(1 + monthlyInterest, (-form.loanDuration * 12))));
 
-  return ((numerator / denominator) + form.pmi + form.propertyTax).toFixed(2);
+  const number = ((numerator / denominator) + form.pmi + form.propertyTax);
+
+  return isFinite(number) && !isNaN(number) ? number.toFixed(2) : 0;
 };
