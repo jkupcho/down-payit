@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
+import { connect } from 'react-redux'
 import './App.css';
 
 class App extends Component {
@@ -11,11 +12,18 @@ class App extends Component {
           <h2>Welcome to React</h2>
         </div>
         <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
+          {this.props.form.propertyValue} To get started, edit <code>src/App.js</code> and save to reload.
         </p>
       </div>
     );
   }
 }
 
-export default App;
+function mapStateToProps (state) {
+  return {
+    form: state.form
+  };
+}
+
+const ConnectedApp = connect(mapStateToProps)(App);
+export default ConnectedApp;
