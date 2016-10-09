@@ -18,9 +18,13 @@ export default class NumericInput extends Component {
 
   componentWillMount() {
     this.setState({
-      formattedValue: 0,
-      numValue: 0
+      formattedValue: this.formatValue(this.props.value),
+      numValue: this.props.value
     });
+  }
+
+  formatValue(value) {
+    return value.toLocaleString(undefined, { maximumFractionDigits: 2 });
   }
 
   onChange(event) {
@@ -29,7 +33,7 @@ export default class NumericInput extends Component {
     if (isNumber(numValue)) {
       const hasTrailingDecimal = hasTrailingDecimalPoint(numStr);
       this.setState({
-        formattedValue: numValue.toLocaleString(undefined, { maximumFractionDigits: 2}) + (hasTrailingDecimal ? '.' : '')
+        formattedValue: this.formatValue(numValue) + (hasTrailingDecimal ? '.' : '')
       });
       this.updateValue(numValue);
     }
