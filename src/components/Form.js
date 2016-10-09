@@ -1,19 +1,29 @@
 import React from 'react';
-import Input from './Input';
-import NumberInput from './NumberInput';
+import FormControl from './FormControl';
 import NumericInput from '../containers/NumericInput';
 
 export default ({form, formUpdated, interest}) => {
 
   return (
     <form>
-      <NumberInput inputLabel={'Property Value'} field={'propertyValue'} value={form.propertyValue} handleChange={formUpdated} />
-      <NumberInput inputLabel={'Down Payment'} field={'downPayment'} value={form.downPayment} handleChange={formUpdated} />
-      <NumberInput inputLabel={'Loan Duration'} field={'loanDuration'} value={form.loanDuration} handleChange={formUpdated} />
-      <NumberInput inputLabel={'Property Tax'} field={'propertyTax'} value={form.propertyTax} handleChange={formUpdated} />
-      <NumericInput handleChange={formUpdated} field={'propertyTax'} value={form.propertyTax} />
-      <NumberInput inputLabel={'PMI'} field={'pmi'} value={form.pmi} handleChange={formUpdated} />
-      <Input inputLabel={'APR'} field={'interest'} value={interest} handleChange={formUpdated} />
+      <FormControl label={'Property Value'}>
+        <NumericInput handleChange={formUpdated} field={'propertyValue'} value={form.propertyValue} />
+      </FormControl>
+      <FormControl label={'Down Payment'}>
+        <NumericInput handleChange={formUpdated} field={'downPayment'} value={form.downPayment} />
+      </FormControl>
+      <FormControl label={'Loan Duration'}>
+        <NumericInput handleChange={formUpdated} field={'loanDuration'} value={form.loanDuration} />
+      </FormControl>
+      <FormControl label={'Property Tax'}>
+        <NumericInput handleChange={formUpdated} field={'propertyTax'} value={form.propertyTax} />
+      </FormControl>
+      <FormControl label={'PMI'}>
+        <NumericInput handleChange={formUpdated} field={'pmi'} value={form.pmi} />
+      </FormControl>
+      <FormControl label={'APR'}>
+        <NumericInput handleChange={formUpdated} field={'interest'} value={interest} />
+      </FormControl>
     </form>
   )
 }

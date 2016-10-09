@@ -10,7 +10,8 @@ export default class NumericInput extends Component {
   constructor(props) {
     super(props);
 
-    // Rebind to allow for React functions to be accessible through 'this'.
+    // Rebind to allow for React functions to be accessible through 'this' within
+    // non-React lifecycle functions.
     // Also, adding debounce to it only propagates state changes after 500 ms.
     this.updateValue = debounce(this.updateValue, 500);
     this.onChange = this.onChange.bind(this);
