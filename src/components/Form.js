@@ -1,7 +1,8 @@
 import React from 'react';
+import Input from './Input';
 import NumberInput from './NumberInput';
 
-export default ({form, formUpdated}) => {
+export default ({form, formUpdated, interest}) => {
 
   return (
     <form>
@@ -10,6 +11,7 @@ export default ({form, formUpdated}) => {
       <NumberInput inputLabel={'Loan Duration'} field={'loanDuration'} value={form.loanDuration} handleChange={formUpdated} />
       <NumberInput inputLabel={'Property Tax'} field={'propertyTax'} value={form.propertyTax} handleChange={formUpdated} />
       <NumberInput inputLabel={'PMI'} field={'pmi'} value={form.pmi} handleChange={formUpdated} />
+      <Input inputLabel={'APR'} field={'interest'} value={interest} handleChange={formUpdated} />
     </form>
   )
 }

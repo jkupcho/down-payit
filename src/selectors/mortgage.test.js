@@ -11,8 +11,9 @@ it('should calculate the correct mortgage', () => {
   };
 
   const interestRate = 6.5;
+  const principal = form.propertyValue - form.downPayment;
 
-  expect(calculateMortgagePayment(form, interestRate)).toEqual('1264.14');
+  expect(calculateMortgagePayment(form, interestRate, principal)).toEqual('1264.14');
 });
 
 it('should calculate the correct mortgage with a downpayment', () => {
@@ -25,6 +26,7 @@ it('should calculate the correct mortgage with a downpayment', () => {
   };
 
   const interestRate = 3.42;
+  const principal = form.propertyValue - form.downPayment;
 
-  expect(calculateMortgagePayment(form, interestRate)).toEqual('1663.65');
+  expect(calculateMortgagePayment(form, interestRate, principal)).toEqual('1663.65');
 });

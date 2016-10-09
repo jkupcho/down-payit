@@ -14,7 +14,7 @@ export default ({field, value, inputLabel, handleChange}) => {
       <input type="text"
              className="form-control"
              placeholder={inputLabel}
-             onChange={propagateUpdate}
+             onBlur={propagateUpdate}
              value={value}
              />
     </div>
