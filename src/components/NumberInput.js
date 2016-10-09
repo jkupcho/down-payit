@@ -13,7 +13,7 @@ export default (props) => {
   function convertValue (payload) {
     const converted = payload[props.field].replace(/,/g, '');
     if (isNumber(converted) || converted.length === 0) {
-      props.handleChange({
+      props.onChange({
         [props.field]: +converted
       });
     }

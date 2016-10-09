@@ -11,7 +11,7 @@ export default ({form, formUpdated, interest}) => {
       <NumberInput inputLabel={'Down Payment'} field={'downPayment'} value={form.downPayment} handleChange={formUpdated} />
       <NumberInput inputLabel={'Loan Duration'} field={'loanDuration'} value={form.loanDuration} handleChange={formUpdated} />
       <NumberInput inputLabel={'Property Tax'} field={'propertyTax'} value={form.propertyTax} handleChange={formUpdated} />
-      <NumericInput />
+      <NumericInput handleChange={formUpdated} field={'propertyTax'} value={form.propertyTax} />
       <NumberInput inputLabel={'PMI'} field={'pmi'} value={form.pmi} handleChange={formUpdated} />
       <Input inputLabel={'APR'} field={'interest'} value={interest} handleChange={formUpdated} />
     </form>

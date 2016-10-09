@@ -7,13 +7,13 @@ import { debounce } from 'lodash';
 
 export default class NumericInput extends Component {
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     // Rebind to allow for React functions to be accessible through 'this'.
     // Also, adding debounce to it only propagates state changes after 500 ms.
     this.updateValue = debounce(this.updateValue, 500);
-    this.handleChange = this.handleChange.bind(this);
+    this.onChange = this.onChange.bind(this);
   }
 
   componentWillMount() {
@@ -21,10 +21,9 @@ export default class NumericInput extends Component {
       formattedValue: 0,
       numValue: 0
     });
-
   }
 
-  handleChange(event) {
+  onChange(event) {
     const numStr = event.target.value;
     const numValue = convertToNumberFromLocaleString(numStr);
     if (isNumber(numValue)) {
@@ -37,9 +36,9 @@ export default class NumericInput extends Component {
   }
 
   updateValue(numValue) {
-    this.setState({
-      numValue
-    });
+    this.props.handleChange({
+      [this.props.field]: numValue
+    })
   }
 
   render() {
@@ -47,7 +46,7 @@ export default class NumericInput extends Component {
 
     return (
         <input className="form-control"
-          onChange={this.handleChange}
+          onChange={this.onChange}
           value={formattedValue} />
     )
   }
