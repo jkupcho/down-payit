@@ -1,9 +1,9 @@
-function hasTrailingDecimalPoint (numStr) {
-  const firstIndex = numStr.indexOf('.');
+export const hasTrailingDecimalPoint = (numStr) => {
   const lastIndex = numStr.lastIndexOf('.');
+  const firstIndex = numStr.indexOf('.');
 
-  return firstIndex !== -1 && (firstIndex === lastIndex);
-}
+  return lastIndex !== -1 && (lastIndex === (numStr.length - 1)) && firstIndex === lastIndex;
+};
 
 export const isNumber = (value) => {
   if (value === '') { return ''; }
@@ -25,7 +25,12 @@ export const isNumber = (value) => {
  */
 export const convertNumberToLocaleString = (numStr) => {
   const convertedNumber = parseFloat(numStr);
-  const hasTrailingDecimal = hasTrailingDecimalPoint(numStr);
 
-  return convertedNumber.toLocaleString() + (hasTrailingDecimal ? '.' : '');
+  return convertedNumber.toLocaleString();
+};
+
+export const convertToNumberFromLocaleString = (numStr) => {
+  if (numStr === '') { return 0; }
+  const replaced = numStr.replace(/,/g, '');
+  return parseFloat(replaced);
 };
