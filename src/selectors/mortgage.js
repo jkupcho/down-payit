@@ -34,3 +34,30 @@ export const calculateMortgagePayment = ({loanDuration, pmi, propertyTax}, inter
 
   return isNumber(payment) ? payment.toFixed(2) : 0;
 };
+
+export const canCalculatePayment = ({ loanDuration, propertyValue }, interest) => {
+  return isNumber(interest) && (
+    (isNumber(loanDuration) && loanDuration > 0) &&
+    (isNumber(propertyValue) && propertyValue > 0));
+};
+
+export const derivePaymentBreakdown = ({pmi, propertyTax, loanDuration}, principal, monthlyInterest, interest) => {
+  return [
+    {
+      name: 'Interest',
+      value: parseFloat(monthlyInterest.toFixed(2))
+    },
+    {
+      name: 'PMI',
+      value: pmi
+    },
+    {
+      name: 'Principal',
+      value: parseFloat((calculatePrincipalPlusInterest(interest, principal, loanDuration) - monthlyInterest).toFixed(2))
+    },
+    {
+      name: 'Taxes',
+      value: propertyTax
+    }
+  ];
+};

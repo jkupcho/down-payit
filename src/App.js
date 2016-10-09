@@ -4,7 +4,10 @@ import './App.css';
 
 import Form from './components/Form';
 import Breakdown from './components/Breakdown';
-import { getMortgagePayment } from './selectors';
+import { getMortgagePayment,
+  getPaymentBreakdown,
+  getCanCalculatePayment
+} from './selectors';
 
 class App extends Component {
   render() {
@@ -15,7 +18,7 @@ class App extends Component {
             <Form {...this.props} />
           </div>
           <div className="col-md-8">
-            <Breakdown />
+            <Breakdown {...this.props} />
             <p className="well">
               {this.props.mortgagePayment}
             </p>
@@ -30,7 +33,9 @@ function mapStateToProps (state) {
   return {
     form: state.form,
     interest: state.interest,
-    mortgagePayment: getMortgagePayment(state)
+    mortgagePayment: getMortgagePayment(state),
+    paymentBreakdown: getPaymentBreakdown(state),
+    canCalculatePayment: getCanCalculatePayment(state)
   };
 }
 
