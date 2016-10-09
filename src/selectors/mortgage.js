@@ -1,11 +1,36 @@
-export const calculateMortgagePayment = (form, interest) => {
-  const monthlyInterest = ((interest / 100) / 12);
-  const principal = (form.propertyValue - form.downPayment);
+import { isNumber } from '../utils';
 
-  const numerator = (monthlyInterest * principal);
-  const denominator = (1 - (Math.pow(1 + monthlyInterest, (-form.loanDuration * 12))));
+export const calculateMonthlyInterestRate = (interest) => {
+  return ((interest / 100) / 12);
+};
 
-  const number = ((numerator / denominator) + form.pmi + form.propertyTax);
+export const calculateMonthlyInterest = (principal, monthlyInterestRate) => {
+  return principal * monthlyInterestRate;
+};
 
-  return isFinite(number) && !isNaN(number) ? number.toFixed(2) : 0;
+export const calculatePrincipal = ({propertyValue, downPayment}) => {
+  return propertyValue - downPayment;
+};
+
+/***
+ * This will be key for calculating the debt table.
+ * @param interest
+ * @param principal
+ * @param loanDuration
+ */
+export const calculatePrincipalPlusInterest = (interest, principal, loanDuration) => {
+  const monthlyInterest = calculateMonthlyInterestRate(interest);
+  const numerator = calculateMonthlyInterest(principal, monthlyInterest);
+
+  const denominator = (1 - (Math.pow(1 + monthlyInterest, (-loanDuration * 12))));
+
+  return (numerator / denominator);
+};
+
+export const calculateMortgagePayment = ({loanDuration, pmi, propertyTax}, interest, principal) => {
+  const principalPlusInterest = calculatePrincipalPlusInterest(interest, principal, loanDuration);
+
+  const payment = principalPlusInterest + pmi + propertyTax;
+
+  return isNumber(payment) ? payment.toFixed(2) : 0;
 };

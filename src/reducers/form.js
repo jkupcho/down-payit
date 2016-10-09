@@ -9,8 +9,8 @@ const initialState = {
 export default (state = initialState, action) => {
   switch (action.type) {
     case 'FORM_UPDATED':
-        return { ...state, ...action.payload};
+      return { ...state, ...action.payload};
     default:
-        return state;
+      return state;
   }
 }

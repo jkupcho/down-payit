@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import './App.css';
+
 import Form from './components/Form';
+import Breakdown from './components/Breakdown';
 import { getMortgagePayment } from './selectors';
 
 class App extends Component {
@@ -13,6 +15,7 @@ class App extends Component {
             <Form {...this.props} />
           </div>
           <div className="col-md-8">
+            <Breakdown />
             <p className="well">
               {this.props.mortgagePayment}
             </p>
