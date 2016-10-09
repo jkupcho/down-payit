@@ -2,7 +2,7 @@ const initialState = {
   propertyValue: 0,
   downPayment: 0,
   loanDuration: 0,
-  propertyTax: 12312,
+  propertyTax: 0,
   pmi: 0
 };
 
