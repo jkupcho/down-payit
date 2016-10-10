@@ -50,5 +50,5 @@ it('should calculate the correct monthly amortization', () => {
 
   const amortization = calculateMonthlyAmortization(monthlyInterestRate, principal, principalPlusInterest, month);
 
-  console.log(amortization);
+  expect(amortization).toEqual('197332.60');
 });

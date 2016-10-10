@@ -25,11 +25,6 @@ describe('convertNumberToLocaleString', () => {
     expect(converted).toBe('1,000');
   });
 
-  it('should maintain the trailing decimal', () => {
-    const converted = convertNumberToLocaleString('1000.');
-    expect(converted).toBe('1,000.');
-  })
-
 });
 
 
