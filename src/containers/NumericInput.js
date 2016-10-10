@@ -23,6 +23,12 @@ export default class NumericInput extends Component {
     });
   }
 
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      formattedValue: this.formatValue(nextProps.value)
+    })
+  }
+
   formatValue(value) {
     return value.toLocaleString(undefined, { maximumFractionDigits: 2 });
   }

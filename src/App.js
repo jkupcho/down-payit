@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import './App.css';
 
+import { getInterest } from './actions/interest';
+
 import Form from './components/Form';
 import Breakdown from './components/Breakdown';
 import { getMortgagePayment,
@@ -10,6 +12,11 @@ import { getMortgagePayment,
 } from './selectors';
 
 class App extends Component {
+
+  componentWillMount() {
+    this.props.retrieveInterest();
+  }
+
   render() {
     return (
       <div className="container">
@@ -43,6 +50,9 @@ function mapDispatchToProps (dispatch) {
         type: 'FORM_UPDATED',
         payload
       })
+    },
+    retrieveInterest: () => {
+      dispatch(getInterest())
     }
   }
 }

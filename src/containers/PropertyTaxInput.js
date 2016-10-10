@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import classNames from 'classnames';
 import { debounce } from 'lodash';
 
+
 export default class PropertyTaxInput extends Component {
 
   constructor(props) {
@@ -74,6 +75,9 @@ export default class PropertyTaxInput extends Component {
       'active': isPercentage
     });
 
+    /**
+     * TODO: change this input to be NumericInput
+     */
     return (
       <div>
         <input type="text" className="form-control" value={value} onChange={this.onChange} />
