@@ -45,6 +45,12 @@ export const calculateMonthlyPropertyTax = ({propertyTax}) => {
   return parseFloat(propertyTax / 12);
 };
 
+export const calculateMonthlyAmortization = (monthlyInterestRate, principal, principalPlusInterest, month) => {
+  const powerOfMonthlyInterest = Math.pow((1 + monthlyInterestRate), month);
+
+  return (powerOfMonthlyInterest * principal) - (((powerOfMonthlyInterest - 1) / monthlyInterestRate) * principalPlusInterest);
+};
+
 export const derivePaymentBreakdown = ({pmi, loanDuration}, principal, monthlyInterest, interest, monthlyPropertyTax) => {
   return [
     {
