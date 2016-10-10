@@ -13,16 +13,6 @@ export const calculatePrincipal = ({propertyValue, downPayment}) => {
 };
 
 /***
- * Hack to clean allow for calculatePrincipalPlusInterest
- * to be used easily.
- * @param loanDuration
- * @returns {*}
- */
-export const getLoanDurationFromForm = ({loanDuration}) => {
-  return loanDuration;
-}
-
-/***
  * This will be key for calculating the debt table.
  * @param interest
  * @param principal
@@ -78,23 +68,11 @@ export const calculateAmortization = ({loanDuration}, monthlyInterestRate, princ
   return retVal;
 };
 
-export const derivePaymentBreakdown = ({pmi, loanDuration}, principal, monthlyInterest, interest, monthlyPropertyTax) => {
+export const derivePaymentBreakdown = ({pmi}, monthlyInterest, monthlyPropertyTax, calculatePrincipalPlusInterest) => {
   return [
-    {
-      name: 'Interest',
-      value: parseFloat(monthlyInterest.toFixed(2))
-    },
-    {
-      name: 'PMI',
-      value: pmi
-    },
-    {
-      name: 'Principal',
-      value: parseFloat((calculatePrincipalPlusInterest(interest, principal, loanDuration) - monthlyInterest).toFixed(2))
-    },
-    {
-      name: 'Taxes',
-      value: parseFloat(monthlyPropertyTax.toFixed(2))
-    }
+    { name: 'Interest', value: parseFloat(monthlyInterest.toFixed(2)) },
+    { name: 'PMI', value: pmi },
+    { name: 'Principal', value: parseFloat((calculatePrincipalPlusInterest - monthlyInterest).toFixed(2)) },
+    { name: 'Taxes', value: parseFloat(monthlyPropertyTax.toFixed(2)) }
   ];
 };

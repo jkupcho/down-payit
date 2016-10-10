@@ -8,12 +8,12 @@ import {
   canCalculatePayment,
   calculateMonthlyPropertyTax,
   calculateAmortization,
-  getLoanDurationFromForm,
   calculatePrincipalPlusInterest
 } from './mortgage'
 
 const getForm = (state) => state.form;
 const getInterest = (state) => state.interest;
+const getLoanDuration = (state) => state.form.loanDuration;
 
 export const getMonthlyInterestRate = createSelector(
   [ getInterest ],
@@ -40,8 +40,13 @@ export const getMortgagePayment = createSelector(
   calculateMortgagePayment
 );
 
+export const getPrincipalPlusInterest = createSelector(
+  [ getInterest, getPrincipal, getLoanDuration ],
+  calculatePrincipalPlusInterest
+);
+
 export const getPaymentBreakdown = createSelector(
-  [ getForm, getPrincipal, getMonthlyInterest, getInterest, getMonthlyPropertyTax ],
+  [ getForm, getMonthlyInterest, getMonthlyPropertyTax, getPrincipalPlusInterest ],
   derivePaymentBreakdown
 );
 
@@ -49,16 +54,6 @@ export const getCanCalculatePayment = createSelector(
   [ getForm, getInterest ],
   canCalculatePayment
 );
-
-export const getLoanDuration = createSelector(
-  [ getForm ],
-  getLoanDurationFromForm
-);
-
-export const getPrincipalPlusInterest = createSelector(
-  [ getInterest, getPrincipal, getLoanDuration ],
-  calculatePrincipalPlusInterest
-)
 
 export const getAmortization = createSelector(
   [ getForm, getMonthlyInterestRate, getPrincipal, getPrincipalPlusInterest ],
