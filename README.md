@@ -2,6 +2,16 @@
 
 A mortgage calculator application written in React with charts related to monthly payment breakdown, and amortization.
 
+## Installation
+#### Install Dependencies
+> npm install
+
+#### Run Tests
+> npm test
+
+#### Start Local Server with Proxy'd backend
+> npm start
+
 ## API Used
 I had a tough time finding a public API that was truly "public" (i.e. didn't use an API key).  So I wrote a (really) small 
 Spring Boot application to use the latest numbers from [St. Louis Federal Reserve](https://www.stlouisfed.org/).
