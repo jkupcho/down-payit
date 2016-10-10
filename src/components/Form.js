@@ -1,6 +1,7 @@
 import React from 'react';
 import FormControl from './FormControl';
 import NumericInput from '../containers/NumericInput';
+import PropertyTaxInput from '../containers/PropertyTaxInput';
 
 export default ({form, formUpdated, interest}) => {
 
@@ -16,7 +17,7 @@ export default ({form, formUpdated, interest}) => {
         <NumericInput handleChange={formUpdated} field={'loanDuration'} value={form.loanDuration} />
       </FormControl>
       <FormControl label={'Property Tax'}>
-        <NumericInput handleChange={formUpdated} field={'propertyTax'} value={form.propertyTax} />
+        <PropertyTaxInput handleChange={formUpdated} field={'propertyTax'} propertyValue={form.propertyValue} value={form.propertyTax} />
       </FormControl>
       <FormControl label={'PMI'}>
         <NumericInput handleChange={formUpdated} field={'pmi'} value={form.pmi} />

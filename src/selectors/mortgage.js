@@ -27,10 +27,10 @@ export const calculatePrincipalPlusInterest = (interest, principal, loanDuration
   return (numerator / denominator);
 };
 
-export const calculateMortgagePayment = ({loanDuration, pmi, propertyTax}, interest, principal) => {
+export const calculateMortgagePayment = ({loanDuration, pmi}, interest, principal, monthlyPropertyTax) => {
   const principalPlusInterest = calculatePrincipalPlusInterest(interest, principal, loanDuration);
 
-  const payment = principalPlusInterest + pmi + propertyTax;
+  const payment = principalPlusInterest + pmi + monthlyPropertyTax;
 
   return isNumber(payment) ? payment.toFixed(2) : 0;
 };
@@ -41,7 +41,11 @@ export const canCalculatePayment = ({ loanDuration, propertyValue }, interest) =
     (isNumber(propertyValue) && propertyValue > 0));
 };
 
-export const derivePaymentBreakdown = ({pmi, propertyTax, loanDuration}, principal, monthlyInterest, interest) => {
+export const calculateMonthlyPropertyTax = ({propertyTax}) => {
+  return parseFloat(propertyTax / 12);
+};
+
+export const derivePaymentBreakdown = ({pmi, loanDuration}, principal, monthlyInterest, interest, monthlyPropertyTax) => {
   return [
     {
       name: 'Interest',
@@ -57,7 +61,7 @@ export const derivePaymentBreakdown = ({pmi, propertyTax, loanDuration}, princip
     },
     {
       name: 'Taxes',
-      value: propertyTax
+      value: parseFloat(monthlyPropertyTax.toFixed(2))
     }
   ];
 };

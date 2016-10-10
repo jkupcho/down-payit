@@ -19,9 +19,6 @@ class App extends Component {
           </div>
           <div className="col-md-8">
             <Breakdown {...this.props} />
-            <p className="well">
-              {this.props.mortgagePayment}
-            </p>
           </div>
         </div>
       </div>

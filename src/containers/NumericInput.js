@@ -12,15 +12,14 @@ export default class NumericInput extends Component {
 
     // Rebind to allow for React functions to be accessible through 'this' within
     // non-React lifecycle functions.
-    // Also, adding debounce to it only propagates state changes after 500 ms.
-    this.updateValue = debounce(this.updateValue, 500);
+    // Also, adding debounce to it only propagates state changes after 750 ms.
+    this.updateValue = debounce(this.updateValue, 750);
     this.onChange = this.onChange.bind(this);
   }
 
   componentWillMount() {
     this.setState({
-      formattedValue: this.formatValue(this.props.value),
-      numValue: this.props.value
+      formattedValue: this.formatValue(this.props.value)
     });
   }
 
@@ -43,7 +42,7 @@ export default class NumericInput extends Component {
   updateValue(numValue) {
     this.props.handleChange({
       [this.props.field]: numValue
-    })
+    });
   }
 
   render() {
