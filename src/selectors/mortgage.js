@@ -70,9 +70,8 @@ export const calculateAmortization = ({loanDuration}, monthlyInterestRate, princ
 
 export const derivePaymentBreakdown = ({pmi}, monthlyInterest, monthlyPropertyTax, calculatePrincipalPlusInterest) => {
   return [
-    { name: 'Interest', value: parseFloat(monthlyInterest.toFixed(2)) },
+    { name: 'Principal + Interest', value: parseFloat((calculatePrincipalPlusInterest).toFixed(2)) },
     { name: 'PMI', value: pmi },
-    { name: 'Principal', value: parseFloat((calculatePrincipalPlusInterest - monthlyInterest).toFixed(2)) },
     { name: 'Taxes', value: parseFloat(monthlyPropertyTax.toFixed(2)) }
   ];
 };

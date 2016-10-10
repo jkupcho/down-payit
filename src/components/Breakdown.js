@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { PieChart, Pie, Cell } from 'recharts';
+import IncompleteForm from './IncompleteForm';
 
 export default ({paymentBreakdown, canCalculatePayment}) => {
 
@@ -15,7 +16,7 @@ export default ({paymentBreakdown, canCalculatePayment}) => {
     '#E8D3A5'
   ];
 
-  let content = <p>Please enter values for Property Value and Loan Duration</p>;
+  let content = <IncompleteForm />;
 
   if (canCalculatePayment) {
     const data = paymentBreakdown;
