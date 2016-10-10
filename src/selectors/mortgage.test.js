@@ -3,7 +3,8 @@ import {
   calculateMonthlyAmortization,
   calculateMonthlyInterestRate,
   calculatePrincipalPlusInterest,
-  calculateMonthlyPropertyTax
+  calculateMonthlyPropertyTax,
+  calculateAmortization
 } from './mortgage';
 
 it('should calculate the correct mortgage', () => {
@@ -39,16 +40,27 @@ it('should calculate the correct mortgage with a downpayment', () => {
   expect(calculateMortgagePayment(form, interestRate, principal, monthlyPropertyTax)).toEqual('1663.65');
 });
 
-it('should calculate the correct monthly amortization', () => {
+
+describe('amortization', () => {
   const interestRate = 6;
-  const loanDuration = 30;
+  const loanDuration = 10;
   const principal = 200000;
-  const month = 13;
 
   const monthlyInterestRate = calculateMonthlyInterestRate(interestRate);
   const principalPlusInterest = calculatePrincipalPlusInterest(interestRate, principal, loanDuration);
 
-  const amortization = calculateMonthlyAmortization(monthlyInterestRate, principal, principalPlusInterest, month);
+  it('should calculate the correct monthly amortization', () => {
+    const month = 13;
 
-  expect(amortization).toEqual('197332.60');
+    const amortization = calculateMonthlyAmortization(monthlyInterestRate, principal, principalPlusInterest, month);
+
+    expect(amortization).toEqual('183649.87');
+  });
+
+  it('should do stuff', () => {
+    const retVal = calculateAmortization({loanDuration}, monthlyInterestRate, principal, principalPlusInterest);
+
+    expect(retVal[1]).toEqual({value: 197553.08, interest: 993.90, principal: 1226.51});
+  });
+
 });

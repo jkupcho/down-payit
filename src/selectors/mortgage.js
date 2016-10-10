@@ -13,18 +13,27 @@ export const calculatePrincipal = ({propertyValue, downPayment}) => {
 };
 
 /***
+ * Hack to clean allow for calculatePrincipalPlusInterest
+ * to be used easily.
+ * @param loanDuration
+ * @returns {*}
+ */
+export const getLoanDurationFromForm = ({loanDuration}) => {
+  return loanDuration;
+}
+
+/***
  * This will be key for calculating the debt table.
  * @param interest
  * @param principal
  * @param loanDuration
  */
 export const calculatePrincipalPlusInterest = (interest, principal, loanDuration) => {
-  const monthlyInterest = calculateMonthlyInterestRate(interest);
-  const numerator = calculateMonthlyInterest(principal, monthlyInterest);
+  const monthlyInterestRate = calculateMonthlyInterestRate(interest);
 
-  const denominator = (1 - (Math.pow(1 + monthlyInterest, (-loanDuration * 12))));
+  const denominator = (1 - (Math.pow(1 + monthlyInterestRate, -(loanDuration * 12))));
 
-  return (numerator / denominator);
+  return (monthlyInterestRate / denominator) * principal;
 };
 
 export const calculateMortgagePayment = ({loanDuration, pmi}, interest, principal, monthlyPropertyTax) => {
@@ -49,6 +58,24 @@ export const calculateMonthlyAmortization = (monthlyInterestRate, principal, pri
   const powerOfMonthlyInterest = Math.pow((1 + monthlyInterestRate), month);
 
   return ((powerOfMonthlyInterest * principal) - (((powerOfMonthlyInterest - 1) / monthlyInterestRate) * principalPlusInterest)).toFixed(2);
+};
+
+export const calculateAmortization = ({loanDuration}, monthlyInterestRate, principal, principalPlusInterest) => {
+  let retVal = [];
+
+  Array(loanDuration * 12)
+    .fill()
+    .forEach((obj, i) => {
+      const amortization = calculateMonthlyAmortization(monthlyInterestRate, principal, principalPlusInterest, i + 1);
+      let previousPrincipal = (i === 0 ? principal : retVal[i - 1].value);
+      const monthlyInterest = calculateMonthlyInterest(previousPrincipal, monthlyInterestRate);
+      retVal.push({
+        value: parseFloat(amortization),
+        interest: parseFloat(monthlyInterest.toFixed(2)),
+        principal: parseFloat((principalPlusInterest - monthlyInterest).toFixed(2))
+      });
+    });
+  return retVal;
 };
 
 export const derivePaymentBreakdown = ({pmi, loanDuration}, principal, monthlyInterest, interest, monthlyPropertyTax) => {

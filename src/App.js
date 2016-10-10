@@ -6,6 +6,7 @@ import { getInterest } from './actions/interest';
 
 import Form from './components/Form';
 import Breakdown from './components/Breakdown';
+import Amortization from './containers/Amortization';
 import { getMortgagePayment,
   getPaymentBreakdown,
   getCanCalculatePayment
@@ -27,6 +28,9 @@ class App extends Component {
           <div className="col-md-8">
             <Breakdown {...this.props} />
           </div>
+        </div>
+        <div className="row">
+          <Amortization />
         </div>
       </div>
     );

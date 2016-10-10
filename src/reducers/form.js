@@ -1,7 +1,7 @@
 const initialState = {
-  propertyValue: 0,
+  propertyValue: 250000,
   downPayment: 0,
-  loanDuration: 0,
+  loanDuration: 30,
   propertyTax: 0,
   pmi: 0
 };

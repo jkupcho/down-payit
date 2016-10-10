@@ -79,11 +79,11 @@ export default class PropertyTaxInput extends Component {
      * TODO: change this input to be NumericInput
      */
     return (
-      <div>
+      <div className="input-group">
         <input type="text" className="form-control" value={value} onChange={this.onChange} />
-        <div className="btn-group" role="group">
+        <div className="input-group-btn">
           <button type="button" onClick={this.updatePercentage.bind(this, false)} className={yearlyClasses}>Yearly</button>
-          <button type="button" onClick={this.updatePercentage.bind(this, true)} className={percentageClasses}>Percentage</button>
+          <button type="button" onClick={this.updatePercentage.bind(this, true)} className={percentageClasses}>%</button>
         </div>
       </div>
     )
